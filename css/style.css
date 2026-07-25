@@ -503,3 +503,109 @@ body{
     font-size:18px;
 
 }
+
+/* ===========================
+   FOOTER
+=========================== */
+
+#footer{
+
+    margin-top:120px;
+
+    background:rgba(255,255,255,.04);
+
+    border-top:1px solid rgba(139,92,246,.25);
+
+    backdrop-filter:blur(15px);
+
+    padding:60px 80px 25px;
+
+}
+
+.footer-container{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr;
+
+    gap:50px;
+
+}
+
+.footer-logo img{
+
+    width:70px;
+
+    margin-bottom:15px;
+
+}
+
+.footer-logo h3{
+
+    font-size:28px;
+
+    color:white;
+
+    margin-bottom:15px;
+
+}
+
+.footer-logo p{
+
+    color:#cfcfcf;
+
+    line-height:1.7;
+
+}
+
+.footer-links h4{
+
+    color:white;
+
+    margin-bottom:20px;
+
+}
+
+.footer-links ul{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+.footer-links li{
+
+    margin-bottom:12px;
+
+}
+
+.footer-links a{
+
+    text-decoration:none;
+
+    color:#cfcfcf;
+
+    transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:#b84cff;
+
+}
+
+.footer-bottom{
+
+    margin-top:50px;
+
+    text-align:center;
+
+    color:#8f8f8f;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    padding-top:20px;
+
+}
