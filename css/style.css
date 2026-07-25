@@ -1,108 +1,120 @@
 /*
 
-AYO - RUOK
-
-Website Stylesheet
-
-Created by Navaniii1415
-
-Version 1.0
+=========================================
+AYO - RUOK | Security
+Official Website Stylesheet
+Version : 1.0
+Author : Navaniii1415
+=========================================
 
 */
 
+/* ===========================
+   GLOBAL STYLES
+=========================== */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
 
-background:black;
+    background: #09090b;
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow-x: hidden;
 
 }
 
+/* ===========================
+   LOGO
+=========================== */
+
 .logo{
 
-display: flex;
-
-align-items: center;
-
-gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
 }
 
 .logo img{
 
-width: 50px;
-
-height: 50px;
+    width: 50px;
+    height: 50px;
 
 }
 
 .logo span{
 
-color: white;
+    color: white;
 
-font-size: 24px;
+    font-size: 24px;
 
-font-weight: bold;
-
-font-family: Arial, sans-serif;
+    font-weight: bold;
 
 }
+
 /* ===========================
    NAVIGATION BAR
 =========================== */
 
 .navbar{
 
-display:flex;
+    display: flex;
 
-justify-content:space-between;
+    justify-content: space-between;
 
-align-items:center;
+    align-items: center;
 
-padding:20px 60px;
+    padding: 20px 60px;
 
-position:sticky;
+    position: sticky;
 
-top:0;
+    top: 0;
 
-background:rgba(15,15,20,.75);
+    background: rgba(15,15,20,0.75);
 
-backdrop-filter:blur(15px);
+    backdrop-filter: blur(15px);
 
--webkit-backdrop-filter:blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 
-border-bottom:1px solid rgba(170,0,255,.35);
+    border-bottom: 1px solid rgba(170,0,255,0.35);
 
 }
 
+/* ===========================
+   NAVIGATION LINKS
+=========================== */
+
 .nav-links{
 
-display:flex;
+    display: flex;
 
-list-style:none;
+    list-style: none;
 
-gap:35px;
-
-margin:0;
-
-padding:0;
+    gap: 35px;
 
 }
 
 .nav-links a{
 
-text-decoration:none;
+    text-decoration: none;
 
-color:white;
+    color: white;
 
-font-size:17px;
+    font-size: 17px;
 
-font-family:Arial,sans-serif;
-
-transition:.3s;
+    transition: 0.3s ease;
 
 }
 
 .nav-links a:hover{
 
-color:#b84cff;
+    color: #b84cff;
 
 }
