@@ -45,3 +45,64 @@ font-weight: bold;
 font-family: Arial, sans-serif;
 
 }
+/* ===========================
+   NAVIGATION BAR
+=========================== */
+
+.navbar{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:20px 60px;
+
+position:sticky;
+
+top:0;
+
+background:rgba(15,15,20,.75);
+
+backdrop-filter:blur(15px);
+
+-webkit-backdrop-filter:blur(15px);
+
+border-bottom:1px solid rgba(170,0,255,.35);
+
+}
+
+.nav-links{
+
+display:flex;
+
+list-style:none;
+
+gap:35px;
+
+margin:0;
+
+padding:0;
+
+}
+
+.nav-links a{
+
+text-decoration:none;
+
+color:white;
+
+font-size:17px;
+
+font-family:Arial,sans-serif;
+
+transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+color:#b84cff;
+
+}
