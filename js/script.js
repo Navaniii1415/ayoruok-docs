@@ -1,137 +1,168 @@
-/*
-=========================================
-AYO - RUOK | Security
-Official Website Script
-Version : 2.1
-Author : Navaniii1415
-=========================================
-*/
+/* ============================================================
+   AYO - RUOK | SECURITY — COMPLETE SCRIPT
+   ============================================================ */
 
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
+    'use strict';
 
-    // ----- HAMBURGER MENU -----
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (hamburger) {
-        hamburger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            navLinks.classList.toggle('open');
-            const icon = this.querySelector('i');
-            if (navLinks.classList.contains('open')) {
-                icon.className = 'fas fa-times';
-            } else {
-                icon.className = 'fas fa-bars';
-            }
-        });
+    // ---------- INTRO OVERLAY ----------
+    const overlay = document.getElementById('intro-overlay');
+    if (overlay) {
+        setTimeout(() => {
+            overlay.classList.add('hide');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 1200);
+        }, 2200);
     }
 
-    // Close menu on outside click
-    document.addEventListener('click', function(e) {
-        if (navLinks.classList.contains('open') &&
-            !navLinks.contains(e.target) &&
-            !hamburger.contains(e.target)) {
-            navLinks.classList.remove('open');
-            const icon = hamburger.querySelector('i');
-            icon.className = 'fas fa-bars';
+    // ---------- MOUSE GLOW ----------
+    const glow = document.getElementById('mouse-glow');
+    let glowActive = false;
+
+    document.addEventListener('mousemove', (e) => {
+        if (!glowActive) {
+            glow.classList.add('active');
+            glowActive = true;
         }
+        const x = e.clientX;
+        const y = e.clientY;
+        glow.style.left = x + 'px';
+        glow.style.top = y + 'px';
     });
 
-    // Close menu on link click (mobile)
-    document.querySelectorAll('.nav-links a').forEach(function(link) {
-        link.addEventListener('click', function() {
-            if (navLinks.classList.contains('open')) {
-                navLinks.classList.remove('open');
-                const icon = hamburger.querySelector('i');
-                icon.className = 'fas fa-bars';
-            }
-        });
+    document.addEventListener('mouseleave', () => {
+        glow.classList.remove('active');
+        glowActive = false;
     });
 
-    // ----- ACTIVE NAV LINK ON SCROLL -----
-    const sections = document.querySelectorAll('section[id]');
-    const navLinkItems = document.querySelectorAll('.nav-links a');
+    // ---------- NAVBAR SCROLL EFFECT ----------
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
 
-    function updateActiveLink() {
-        let current = '';
-        sections.forEach(function(section) {
-            const sectionTop = section.offsetTop - 120;
-            if (window.scrollY >= sectionTop) {
-                current = section.getAttribute('id');
-            }
-        });
-        navLinkItems.forEach(function(link) {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', updateActiveLink);
-    updateActiveLink();
-
-    // ----- FAQ ACCORDION -----
-    const faqItems = document.querySelectorAll('.faq-item');
-
-    faqItems.forEach(function(item) {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', function() {
-            faqItems.forEach(function(other) {
-                if (other !== item && other.classList.contains('active')) {
-                    other.classList.remove('active');
-                }
-            });
-            item.classList.toggle('active');
-        });
-    });
-
-    // ----- COMMAND SEARCH -----
-    const searchInput = document.getElementById('commandSearch');
-    const commandCards = document.querySelectorAll('.command-card');
-
-    if (searchInput) {
-        searchInput.addEventListener('keyup', function() {
-            const filter = this.value.toLowerCase().trim();
-            commandCards.forEach(function(card) {
-                const text = card.textContent.toLowerCase();
-                if (text.includes(filter)) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    }
-
-    // ----- BACK TO TOP BUTTON -----
-    const backToTopBtn = document.getElementById('backToTop');
-
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('visible');
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        if (currentScroll > 30) {
+            navbar.classList.add('scrolled');
         } else {
-            backToTopBtn.classList.remove('visible');
+            navbar.classList.remove('scrolled');
         }
+        lastScroll = currentScroll;
     });
 
-    backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    // ---------- MOBILE MENU ----------
+    const toggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (toggle && navLinks) {
+        toggle.addEventListener('click', () => {
+            toggle.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggle.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+    }
+
+    // ---------- SCROLL REVEAL (Intersection Observer) ----------
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -30px 0px'
     });
 
-    // ----- SMOOTH SCROLL FOR ANCHOR LINKS -----
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ---------- ANIMATED COUNTERS ----------
+    const statNumbers = document.querySelectorAll('.stat-number');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.getAttribute('data-count'), 10);
+                if (isNaN(target) || target === 0) return;
+                const duration = 1800;
+                const startTime = performance.now();
+
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Ease-out cubic
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.round(eased * target);
+                    if (target === 999) {
+                        el.textContent = (current / 10).toFixed(1) + '%';
+                    } else if (target === 247) {
+                        el.textContent = '24/7';
+                    } else {
+                        el.textContent = current.toLocaleString();
+                    }
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        if (target === 999) {
+                            el.textContent = '99.9%';
+                        } else if (target === 247) {
+                            el.textContent = '24/7';
+                        } else {
+                            el.textContent = target.toLocaleString();
+                        }
+                    }
+                }
+                requestAnimationFrame(updateCounter);
+                counterObserver.unobserve(el);
+            }
+        });
+    }, {
+        threshold: 0.25
+    });
+
+    statNumbers.forEach(el => counterObserver.observe(el));
+
+    // ---------- SMOOTH SCROLL FOR ANCHOR LINKS ----------
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            const target = document.querySelector(targetId);
-            if (target) {
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
+                const offsetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
             }
         });
     });
 
-    console.log("AYO — RUOK Website Loaded Successfully");
+    // ---------- PARALLAX HERO (subtle) ----------
+    const hero = document.getElementById('hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroContent = hero.querySelector('.hero-content');
+            if (heroContent && scrolled < window.innerHeight) {
+                const translate = scrolled * 0.15;
+                heroContent.style.transform = `translateY(${translate}px)`;
+                heroContent.style.opacity = 1 - (scrolled / (window.innerHeight * 0.8));
+            }
+        });
+    }
 
-});
+    console.log('AYO · RUOK | Premium Website Loaded Successfully');
+
+})();
