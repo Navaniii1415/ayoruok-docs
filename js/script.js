@@ -2,7 +2,7 @@
 =========================================
 AYO - RUOK | Security
 Official Website Script
-Version : 2.0
+Version : 2.1
 Author : Navaniii1415
 =========================================
 */
