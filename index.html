@@ -7,16 +7,35 @@
     <title>AYO - RUOK | Security</title>
     <meta name="description" content="Official AYO - RUOK Security Discord Bot">
 
+    <!-- Google Font (Fallback) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
         /* ============================================================
-           ALL CSS IS HERE — NO EXTERNAL style.css NEEDED
+           ALL CSS — உங்க Sinistre Font connect பண்ணப்பட்டது
            ============================================================ */
 
+        /* ===== IMPORT YOUR CUSTOM FONT ===== */
+        @font-face {
+            font-family: "Sinistre";
+            src: url("assets/font/font/Sinistre-Regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Sinistre";
+            src: url("assets/font/font/Sinistre-Bold.ttf") format("truetype");
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* ===== RESET & BASE ===== */
         *,
         *::before,
         *::after {
@@ -40,7 +59,8 @@
             --text-muted: #c8c8d4;
             --text-dim: #8888a0;
             --border-glow: rgba(139, 92, 246, 0.25);
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Sinistre primary, Inter fallback */
+            --font: "Sinistre", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --radius: 20px;
             --radius-sm: 12px;
             --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.6);
@@ -89,7 +109,7 @@
             max-width: 100%;
         }
 
-        /* ---------- MOUSE GLOW ---------- */
+        /* ===== MOUSE GLOW ===== */
         #mouse-glow {
             position: fixed;
             pointer-events: none;
@@ -107,7 +127,7 @@
             opacity: 1;
         }
 
-        /* ---------- INTRO OVERLAY ---------- */
+        /* ===== INTRO OVERLAY ===== */
         #intro-overlay {
             position: fixed;
             inset: 0;
@@ -175,7 +195,7 @@
             }
         }
 
-        /* ---------- UTILITY ---------- */
+        /* ===== UTILITY ===== */
         .container {
             max-width: 1280px;
             margin: 0 auto;
@@ -216,7 +236,7 @@
             max-width: 620px;
         }
 
-        /* ---------- REVEAL ANIMATIONS ---------- */
+        /* ===== REVEAL ANIMATIONS ===== */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -254,7 +274,7 @@
             transform: scale(1);
         }
 
-        /* ---------- NAVBAR ---------- */
+        /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -380,7 +400,7 @@
             transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* ---------- HERO ---------- */
+        /* ===== HERO ===== */
         #hero {
             min-height: 100vh;
             display: flex;
@@ -537,7 +557,7 @@
             font-weight: 400;
         }
 
-        /* ---------- FEATURES ---------- */
+        /* ===== FEATURES ===== */
         #features {
             padding: 100px 0 120px;
             background: var(--bg-secondary);
@@ -632,7 +652,7 @@
             line-height: 1.7;
         }
 
-        /* ---------- ABOUT ---------- */
+        /* ===== ABOUT ===== */
         #about {
             padding: 120px 0;
             background: var(--bg-primary);
@@ -715,7 +735,7 @@
             box-shadow: 0 0 80px rgba(139, 92, 246, 0.30);
         }
 
-        /* ---------- STATS ---------- */
+        /* ===== STATS ===== */
         #stats {
             padding: 100px 0 120px;
             background: var(--bg-secondary);
@@ -779,7 +799,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* ---------- FOOTER ---------- */
+        /* ===== FOOTER ===== */
         #footer {
             background: var(--bg-primary);
             border-top: 1px solid rgba(139, 92, 246, 0.08);
@@ -869,7 +889,7 @@
             transform: translateY(-3px);
         }
 
-        /* ---------- RESPONSIVE ---------- */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .navbar {
                 padding: 14px 24px;
@@ -1024,7 +1044,7 @@
             }
         }
 
-        /* ---------- SCROLL INDICATOR (hero) ---------- */
+        /* ===== SCROLL INDICATOR ===== */
         .scroll-indicator {
             position: absolute;
             bottom: 30px;
@@ -1285,16 +1305,12 @@
 
     </main>
 
-    <!-- ===== ALL JAVASCRIPT IS HERE — NO EXTERNAL script.js NEEDED ===== -->
+    <!-- ===== JAVASCRIPT (உள்ளேயே) ===== -->
     <script>
-        /* ============================================================
-           ALL JAVASCRIPT IS HERE
-           ============================================================ */
-
         (function() {
             'use strict';
 
-            // ---------- INTRO OVERLAY ----------
+            // INTRO OVERLAY
             const overlay = document.getElementById('intro-overlay');
             if (overlay) {
                 setTimeout(() => {
@@ -1305,7 +1321,7 @@
                 }, 2200);
             }
 
-            // ---------- MOUSE GLOW ----------
+            // MOUSE GLOW
             const glow = document.getElementById('mouse-glow');
             let glowActive = false;
 
@@ -1325,10 +1341,8 @@
                 glowActive = false;
             });
 
-            // ---------- NAVBAR SCROLL EFFECT ----------
+            // NAVBAR SCROLL
             const navbar = document.getElementById('navbar');
-            let lastScroll = 0;
-
             window.addEventListener('scroll', () => {
                 const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
                 if (currentScroll > 30) {
@@ -1336,10 +1350,9 @@
                 } else {
                     navbar.classList.remove('scrolled');
                 }
-                lastScroll = currentScroll;
             });
 
-            // ---------- MOBILE MENU ----------
+            // MOBILE MENU
             const toggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
 
@@ -1357,7 +1370,7 @@
                 });
             }
 
-            // ---------- SCROLL REVEAL ----------
+            // SCROLL REVEAL
             const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
 
             const revealObserver = new IntersectionObserver((entries) => {
@@ -1373,7 +1386,7 @@
 
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // ---------- ANIMATED COUNTERS ----------
+            // ANIMATED COUNTERS
             const statNumbers = document.querySelectorAll('.stat-number');
 
             const counterObserver = new IntersectionObserver((entries) => {
@@ -1419,7 +1432,7 @@
 
             statNumbers.forEach(el => counterObserver.observe(el));
 
-            // ---------- SMOOTH SCROLL ----------
+            // SMOOTH SCROLL
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     const targetId = this.getAttribute('href');
@@ -1436,7 +1449,7 @@
                 });
             });
 
-            // ---------- PARALLAX HERO ----------
+            // PARALLAX HERO
             const hero = document.getElementById('hero');
             if (hero) {
                 window.addEventListener('scroll', () => {
