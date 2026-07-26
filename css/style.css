@@ -1,7 +1,7 @@
 /* =========================================
    AYO - RUOK | Security
    Official Website Stylesheet
-   Version : 2.0
+   Version : 2.1
    Author : Navaniii1415
    ========================================= */
 
@@ -172,6 +172,7 @@ body {
     margin-bottom: 24px;
     border: 1px solid rgba(139, 92, 246, 0.2);
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .hero-badge-top i {
@@ -237,6 +238,7 @@ body {
     color: #fff;
     background: rgba(139, 92, 246, 0.06);
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 .btn-secondary:hover {
