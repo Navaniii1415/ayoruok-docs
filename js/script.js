@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.addEventListener('click', function(e) {
             e.stopPropagation();
             navLinks.classList.toggle('open');
-            // change icon
             const icon = this.querySelector('i');
             if (navLinks.classList.contains('open')) {
                 icon.className = 'fas fa-times';
@@ -27,9 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Close menu when clicking outside
+    // Close menu on outside click
     document.addEventListener('click', function(e) {
-        if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        if (navLinks.classList.contains('open') &&
+            !navLinks.contains(e.target) &&
+            !hamburger.contains(e.target)) {
             navLinks.classList.remove('open');
             const icon = hamburger.querySelector('i');
             icon.className = 'fas fa-bars';
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Close menu on link click (mobile)
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
         link.addEventListener('click', function() {
             if (navLinks.classList.contains('open')) {
                 navLinks.classList.remove('open');
@@ -53,13 +54,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateActiveLink() {
         let current = '';
-        sections.forEach(section => {
+        sections.forEach(function(section) {
             const sectionTop = section.offsetTop - 120;
             if (window.scrollY >= sectionTop) {
                 current = section.getAttribute('id');
             }
         });
-        navLinkItems.forEach(link => {
+        navLinkItems.forEach(function(link) {
             link.classList.remove('active');
             if (link.getAttribute('href') === '#' + current) {
                 link.classList.add('active');
@@ -68,16 +69,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.addEventListener('scroll', updateActiveLink);
-    updateActiveLink(); // initial
+    updateActiveLink();
 
     // ----- FAQ ACCORDION -----
     const faqItems = document.querySelectorAll('.faq-item');
 
-    faqItems.forEach(item => {
+    faqItems.forEach(function(item) {
         const question = item.querySelector('.faq-question');
         question.addEventListener('click', function() {
-            // Close other open items
-            faqItems.forEach(other => {
+            faqItems.forEach(function(other) {
                 if (other !== item && other.classList.contains('active')) {
                     other.classList.remove('active');
                 }
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (searchInput) {
         searchInput.addEventListener('keyup', function() {
             const filter = this.value.toLowerCase().trim();
-            commandCards.forEach(card => {
+            commandCards.forEach(function(card) {
                 const text = card.textContent.toLowerCase();
                 if (text.includes(filter)) {
                     card.style.display = '';
@@ -119,8 +119,8 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ----- SMOOTH SCROLL FOR ANCHOR LINKS (optional) -----
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    // ----- SMOOTH SCROLL FOR ANCHOR LINKS -----
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
@@ -132,6 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    console.log("AYO - RUOK Website Loaded Successfully");
+    console.log("AYO — RUOK Website Loaded Successfully");
 
 });
