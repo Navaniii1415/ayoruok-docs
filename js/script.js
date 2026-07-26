@@ -1,12 +1,137 @@
 /*
-
 =========================================
 AYO - RUOK | Security
 Official Website Script
-Version : 1.0
+Version : 2.0
 Author : Navaniii1415
 =========================================
-
 */
 
-console.log("AYO - RUOK Website Loaded Successfully");
+document.addEventListener('DOMContentLoaded', function() {
+
+    // ----- HAMBURGER MENU -----
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger) {
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navLinks.classList.toggle('open');
+            // change icon
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('open')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+            navLinks.classList.remove('open');
+            const icon = hamburger.querySelector('i');
+            icon.className = 'fas fa-bars';
+        }
+    });
+
+    // Close menu on link click (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (navLinks.classList.contains('open')) {
+                navLinks.classList.remove('open');
+                const icon = hamburger.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+    });
+
+    // ----- ACTIVE NAV LINK ON SCROLL -----
+    const sections = document.querySelectorAll('section[id]');
+    const navLinkItems = document.querySelectorAll('.nav-links a');
+
+    function updateActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinkItems.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink(); // initial
+
+    // ----- FAQ ACCORDION -----
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', function() {
+            // Close other open items
+            faqItems.forEach(other => {
+                if (other !== item && other.classList.contains('active')) {
+                    other.classList.remove('active');
+                }
+            });
+            item.classList.toggle('active');
+        });
+    });
+
+    // ----- COMMAND SEARCH -----
+    const searchInput = document.getElementById('commandSearch');
+    const commandCards = document.querySelectorAll('.command-card');
+
+    if (searchInput) {
+        searchInput.addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase().trim();
+            commandCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // ----- BACK TO TOP BUTTON -----
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ----- SMOOTH SCROLL FOR ANCHOR LINKS (optional) -----
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    console.log("AYO - RUOK Website Loaded Successfully");
+
+});
